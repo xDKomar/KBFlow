@@ -29,7 +29,7 @@ var requestData = new
 {
     name = string.Join(' ', args),
     columnId = dict[dayName],
-    color = "green",
+    color = "white",
     swimlaneId = "pKwPyEm1lChZ",
     position = "top"
 };
