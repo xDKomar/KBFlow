@@ -1,10 +1,5 @@
-﻿// See https://aka.ms/new-console-template for more information
-
-using System;
-using System.Collections.Generic;
-using System.Net.Http;
+﻿using Microsoft.Extensions.Configuration;
 using System.Text;
-
 
 var dict = new Dictionary<string, string>
 {
@@ -34,11 +29,14 @@ var requestData = new
     position = "top"
 };
 
+var config = new ConfigurationBuilder().AddUserSecrets<Program>().Build();
+var secretProvider = config.Providers.First();
+secretProvider.TryGet("api-token", out var token);
+
 var json = System.Text.Json.JsonSerializer.Serialize(requestData);
 var content = new StringContent(json, Encoding.UTF8, "application/json");
-
 var client = new HttpClient();
-var url = "https://kanbanflow.com/api/v1/tasks?apiToken=cR4EARu6Lnjmww4ipKAvAzPcAZ";
+var url = $"https://kanbanflow.com/api/v1/tasks?apiToken={token}";
 using var response = await client.PostAsync(url, content);
 
 response.EnsureSuccessStatusCode();
