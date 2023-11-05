@@ -1,4 +1,7 @@
 # KBFlow
+Simple terminal task creation tool for https://kanbanflow.com/
+
+Usage:
 1. Add valid KBFlow token with user-secrets:
 ```
 dotnet user-secrets init
